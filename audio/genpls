@@ -1,0 +1,4 @@
+#!/bin/sh
+WORKING_DIRECTORY="/mnt/sda3/My_computer/Gopher/Data/Audio/Groups"
+echo "#EXTM3U" > "$HOME/$1.m3u"
+find -P "$WORKING_DIRECTORY/Data/Music/Different/$1" -type f -print | sort >> "$HOME/$1.m3u"

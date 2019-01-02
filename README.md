@@ -17,5 +17,6 @@ localhost management.
 * [DAR scripts](dar) - Disk ARchiver wrapper scripts for packaging and
   catalog splitting.
 * [Image manipulation scripts](graphics)
+* [Audio manipulation scripts](audio)
 
 
