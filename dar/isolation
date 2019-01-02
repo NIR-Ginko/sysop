@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+if test $# -ne 1; then
+	(>&2 echo "There must be an argument specified:")
+	(>&2 echo "1 - Name of the archive (without extension) to split header from.")
+	exit 1
+fi
+
+if command -v dar; then
+	DAR=dar
+else
+	(>&2 echo "DAR command not found in standard paths.")
+	exit 2
+fi
+
+CATALOG_EXT=dcat
+
+${DAR} \
+	-C ${1}.${CATALOG_EXT} \
+	-A ${2}
+
