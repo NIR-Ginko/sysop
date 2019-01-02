@@ -16,5 +16,6 @@ localhost management.
 * [BHyVe deployment scripts](bhyve)
 * [DAR scripts](dar) - Disk ARchiver wrapper scripts for packaging and
   catalog splitting.
+* [Image manipulation scripts](graphics)
 
 
