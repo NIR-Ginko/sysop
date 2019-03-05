@@ -1,0 +1,18 @@
+---
+
+- name: Installing packages
+  package:
+    name: '{{ item.pkg }}'
+    state: '{{ item.state }}'
+  loop: '{{ userspace_packages }}'
+  become: True
+
+- name: Add user to a necessary groups
+  user:
+    name: '{{ ansible_env.USER }}'
+    group: '{{ ansible_env.USER }}'
+    groups: '{{ item }}'
+    append: True
+  become: True
+  with_items: '{{ package_groups }}'
+

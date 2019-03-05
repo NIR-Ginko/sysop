@@ -1,0 +1,14 @@
+---
+
+- name: Configure the base system
+  include_tasks: 00-base-system.yml
+
+- name: Bootstrap the ports tree and install ports
+  include_tasks: 01-ports.yml
+
+- name: Configure dnscrypt-proxy2 package
+  include_tasks: 01-dnscrypt-proxy2.yml
+
+- name: Configure the Unbound local caching DNS resolver
+  include_tasks: 01-unbound.yml
+

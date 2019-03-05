@@ -1,0 +1,67 @@
+---
+
+# Ignore errors because the role might be executed even when there is
+# some connectivity problems.
+- name: Install Unbound
+  package:
+    name:  'unbound'
+    state: present
+  become: True
+  ignore_errors: True
+
+- name: Stop Unbound
+  command: '/etc/rc.d/local_unbound onestop'
+  become: True
+  ignore_errors: True
+
+- name: Create the unbound configuration directory
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: 'unbound'
+    group: 'unbound'
+    mode: '0755'
+  with_items:
+    - '/var/unbound'
+    - '/var/unbound/conf.d'
+  become: True
+
+- name: Deploy additional Unbound settings
+  copy:
+    src: '{{ item }}'
+    dest: '/var/unbound/conf.d/{{ item | basename }}'
+    owner: 'root'
+    group: 'unbound'
+    mode: '0755'
+  with_fileglob:
+    - '{{ role_path }}/files/unbound/*'
+  become: True
+
+- name: Provide the OpenNIC hints file for the Unbound
+  copy:
+    src: '{{ role_path }}/files/db.root'
+    dest: '/var/unbound/root.hints'
+    owner: 'root'
+    group: 'unbound'
+    mode: '0644'
+  become: True
+
+- name: Configure the Unbound
+  template:
+    src: 'unbound/unbound.conf.j2'
+    dest: '/var/unbound/unbound.conf'
+    owner: 'root'
+    group: 'unbound'
+    mode: '0644'
+  become: True
+
+- name: Cleanup the Unbound logfile
+  file:
+    path: '/var/unbound/unbound.log'
+    state: absent
+  become: True
+
+- name: Start Unbound
+  command: '/etc/rc.d/local_unbound onestart'
+  become: True
+

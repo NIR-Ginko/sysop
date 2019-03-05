@@ -1,0 +1,40 @@
+#jinja2: lstrip_breaks: True
+sendmail_enable="NONE"
+hostname="nir-pc.local"
+keymap="ru.kbd"
+ifconfig_re0="inet {{ ifip }}"
+defaultrouter="{{ defgw }}"
+firewall_type="{{ fw_type }}"
+firewall_logging="YES"
+# Set dumpdev to "AUTO" to enable crash dumps, "NO" to disable
+dumpdev="NO"
+dnscrypt_proxy_resolver="opennic"
+zeronet_args="--tor enable"
+
+# Graphics driver load
+kld_list="radeonkms"
+
+# Section to enable features
+## Cleanup /tmp on startup
+clear_tmp_enable="YES"
+## Start webcam service
+webcamd_enable="YES"
+## Start local caching DNS resolver
+local_unbound_enable="YES"
+## Enable mouse support for terminals
+moused_enable="YES"
+## Synchronize time
+ntpd_enable="YES"
+## Enable ZFS support
+zfs_enable="YES"
+## D-Bus service for Lumina DE
+dbus_enable="YES"
+## Enable IPFW2
+firewall_enable="YES"
+## DNSCrypt proxy for DNS-over-TLS
+dnscrypt_proxy_enable="YES"
+
+# Section for flags
+syslogd_flags="-ss"
+webcamd_0_flags="-N Generic-HP-Truevision-HD -S 200901010001 -M 0"
+

@@ -1,0 +1,32 @@
+server:
+	port: 53
+	access-control: 10.0.0.0/8 allow
+	access-control: 127.0.0.0/8 allow
+	access-control: 192.168.0.0/16 allow
+	access-control: ::1 allow
+	cache-max-ttl: 14400
+	cache-min-ttl: 300
+	hide-identity: yes
+	hide-version: yes
+	interface: 127.0.0.1
+	minimal-responses: yes
+	prefetch: yes
+	qname-minimisation: yes
+	rrset-roundrobin: yes
+	use-caps-for-id: yes
+	verbosity: 1
+
+	username: unbound
+	directory: /var/unbound
+	chroot: /var/unbound
+	pidfile: /var/run/local_unbound.pid
+
+	do-not-query-localhost: no
+
+forward-zone:
+	name: "."
+	forward-addr: 127.0.0.1@10053
+
+# Include blocklists:
+include: /var/unbound/conf.d/*.conf
+

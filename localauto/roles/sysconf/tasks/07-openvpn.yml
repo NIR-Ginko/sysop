@@ -1,0 +1,8 @@
+---
+
+- name: Install OpenVPN
+  package:
+    name: openvpn
+    state: present
+  become: True
+

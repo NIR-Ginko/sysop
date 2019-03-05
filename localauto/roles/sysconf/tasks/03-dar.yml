@@ -1,0 +1,10 @@
+---
+
+- name: Deploy DAR settings
+  template:
+    src: 'darrc.j2'
+    dest: '{{ localetc }}/darrc'
+    owner: 'root'
+    group: 'wheel'
+    mode: '0644'
+

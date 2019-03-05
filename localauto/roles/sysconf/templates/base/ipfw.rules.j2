@@ -1,0 +1,21 @@
+{{ fw }} -q -f flush
+{{ fw }} add 00010 check-state
+# Local DNS configuration
+{{ fw }} add 00110 allow udp log from 127.0.0.1 to 127.0.0.1 domain in via lo
+{{ fw }} add 00120 allow tcp log from 127.0.0.1 to 127.0.0.1 domain in via lo
+{{ fw }} add 00130 allow udp log from ::1 to ::1 domain in via lo
+{{ fw }} add 00140 allow tcp log from ::1 to ::1 domain in via lo
+{{ fw }} add 00150 allow udp log from 127.0.0.1 to any domain out via lo
+{{ fw }} add 00160 allow tcp log from 127.0.0.1 to any domain out via lo
+{{ fw }} add 00170 allow udp log from ::1 to any domain out via lo
+{{ fw }} add 00180 allow tcp log from ::1 to any domain out via lo
+
+{{ fw }} add 00200 allow tcp log from any to any http in via lo
+{{ fw }} add 00200 allow tcp log from any to any http in via re0
+{{ fw }} add 00200 allow tcp log from any to any http out via lo
+{{ fw }} add 00200 allow tcp log from any to any http out via re0
+
+{{ fw }} add 00200 allow tcp log from any to any https in via lo
+{{ fw }} add 00200 allow tcp log from any to any https in via re0
+{{ fw }} add 00200 allow tcp log from any to any https out via re0
+{{ fw }} add 00200 allow tcp log from any to any https out via re0

@@ -1,0 +1,29 @@
+---
+
+# Ignore errors because the role might be executed even when there is
+# some connectivity problems
+- name: Install DNSCrypt package
+  package:
+    name: 'dnscrypt-proxy2'
+    state: present
+  become: True
+  ignore_errors: True
+
+- name: Stop DNSCrypt service
+  command: 'service dnscrypt-proxy onestop'
+  become: True
+  ignore_errors: True
+
+- name: Deploy DNSCrypt configuration
+  template:
+    src: 'dnscrypt-proxy2/dnscrypt-proxy.toml.j2'
+    dest: '/usr/local/etc/dnscrypt-proxy/dnscrypt-proxy.toml'
+    owner: 'root'
+    group: 'wheel'
+    mode: '0644'
+  become: True
+
+- name: Start DNSCrypt service
+  command: 'service dnscrypt-proxy onestart'
+  become: True
+

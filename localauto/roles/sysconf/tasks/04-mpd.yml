@@ -1,0 +1,30 @@
+---
+
+- name: Create MPD settings directory
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ usr }}'
+    group: '{{ usr }}'
+    mode: '0770'
+  with_items:
+    - '/var/mpd'
+    - '/var/mpd/playlists'
+  become: True
+
+- name: Deploy MPD configuration for the user
+  template:
+    src: 'mpdconf.j2'
+    dest: '{{ homedir }}/{{ usr }}/.mpdconf'
+    owner: '{{ usr }}'
+    group: '{{ usr }}'
+    mode: '0600'
+
+- name: Add the user to the MPD group
+  user:
+    name: '{{ ansible_env.USER }}'
+    group: '{{ ansible_env.USER }}'
+    groups: 'mpd'
+    append: True
+  become: True
+

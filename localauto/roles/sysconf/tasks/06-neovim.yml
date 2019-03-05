@@ -1,0 +1,21 @@
+---
+
+- name: Install NeoVim package
+  package:
+    name: neovim
+    state: present
+  become: True
+
+- name: Create NeoVim configuration directory
+  file:
+    path: '{{ homedir }}/{{ usr }}/.config/nvim'
+    state: directory
+
+- name: Deploy NeoVim configuration
+  template:
+    src: 'init.vim.j2'
+    dest: '{{ homedir }}/{{ usr }}/.config/nvim/init.vim'
+    owner: '{{ usr }}'
+    group: '{{ usr }}'
+    mode: '0600'
+

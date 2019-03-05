@@ -1,0 +1,35 @@
+usr: 'nir'
+etc: '/etc'
+localetc: '/usr/local/etc'
+homedir: '/usr/home'
+
+defgw: '192.168.8.1'
+ifip: '192.168.8.100/24'
+
+# Programs
+gui_video_player: 'mpv'
+
+video_types:
+  - 'video/mp2t'
+  - 'video/mp4'
+  - 'video/mpeg'
+  - 'video/msvideo'
+  - 'video/ogg'
+  - 'video/quicktime'
+  - 'video/vnd.rn-realvideo'
+  - 'video/webm'
+  - 'video/x-avi'
+  - 'video/x-fli'
+  - 'video/x-flv'
+  - 'video/x-matroska'
+  - 'video/x-mpeg'
+  - 'video/x-mpeg2'
+  - 'video/x-ms-afs'
+  - 'video/x-ms-asf'
+  - 'video/x-ms-wmv'
+  - 'video/x-ms-wmx'
+  - 'video/x-ms-wvxvideo'
+  - 'video/x-msvideo'
+  - 'video/x-ogm+ogg'
+  - 'video/x-theora'
+

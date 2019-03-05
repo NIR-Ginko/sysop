@@ -1,0 +1,8 @@
+---
+
+- name: Install stunnel
+  package:
+    name: stunnel
+    state: present
+  become: True
+

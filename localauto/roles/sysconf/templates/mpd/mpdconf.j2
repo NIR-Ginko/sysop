@@ -1,0 +1,21 @@
+music_directory    "/nir-data/music"
+db_file            "/var/mpd/mpd.db"
+#log_file           "syslog"
+#log_level          "default"
+pid_file           "/var/mpd/musicpd.pid"
+playlist_directory "/var/mpd/playlists"
+state_file         "/var/mpd/mpd.state"
+#bind_to_address    "[::1]:6600"
+follow_outside_symlinks "no"
+follow_inside_symlinks  "no"
+zeroconf_enabled        "no"
+auto_update             "yes"
+audio_output {
+	type "oss"
+	name "Default Device"
+	device "/dev/dsp"
+	mixer_type "hardware"
+	mixer_device "/dev/mixer"
+	mixer_control "vol"
+}
+

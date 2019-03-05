@@ -1,0 +1,12 @@
+---
+
+- name: Install MPV
+  package:
+    name: 'mpv'
+    state: present
+  become: True
+
+- name: Configure MPV associations for XDG
+  command: 'xdg-mime default mpv.desktop {{ item }}'
+  with_items: '{{ video_types }}'
+

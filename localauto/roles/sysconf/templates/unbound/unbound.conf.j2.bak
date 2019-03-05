@@ -1,0 +1,228 @@
+server:
+	port: 53
+	interface: 127.0.0.1
+	interface: 192.168.8.100
+	interface-automatic: yes
+	access-control: 192.168.8.0/24 allow
+	access-control: 127.0.0.0/8 allow
+	access-control: 10.0.0.0/8 allow
+	access-control: ::1 allow
+	do-ip4: yes
+	do-ip6: yes
+	do-udp: yes
+	do-tcp: yes
+	unblock-lan-zones: yes
+	insecure-lan-zones: yes
+	hide-version: yes
+	hide-identity: yes
+	harden-glue: yes
+	harden-dnssec-stripped: yes
+	username: unbound
+	directory: /var/unbound
+	chroot: /var/unbound
+	pidfile: /var/run/local_unbound.pid
+	auto-trust-anchor-file: /var/unbound/root.key
+	{% if unbound_logfile %}
+	logfile: /var/unbound/unbound.log
+	use-syslog: no
+	log-queries: yes
+	verbosity: {{ unbound_verbosity }}
+	{% endif %}
+	root-hints: "/var/unbound/root.hints"
+	# Blocking Ad Server domains. Google's AdSense, DoubleClick and Yahoo
+	# account for a 70 percent share of all advertising traffic. Block them.
+	local-zone: "doubleclick.net" redirect
+	local-data: "doubleclick.net A 127.0.0.1"
+	local-zone: "googlesyndication.com" redirect
+	local-data: "googlesyndication.com A 127.0.0.1"
+	local-zone: "googleadservices.com" redirect
+	local-data: "googleadservices.com A 127.0.0.1"
+	local-zone: "google-analytics.com" redirect
+	local-data: "google-analytics.com A 127.0.0.1"
+	local-zone: "ads.youtube.com" redirect
+	local-data: "ads.youtube.com A 127.0.0.1"
+	local-zone: "adserver.yahoo.com" redirect
+	local-data: "adserver.yahoo.com A 127.0.0.1"
+	local-zone: "ask.com" redirect
+	local-data: "ask.com A 127.0.0.1"
+	include: /var/unbound/conf.d/*.conf
+
+stub-zone:
+	name: "geek"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "bbs"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "dyn"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "free"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "fur"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "glue"
+	stub-addr: 185.121.177.177
+	stub-addr: 169.239.202.202
+	stub-addr: 207.148.83.241
+	stub-addr: 111.67.20.8
+	stub-addr: 142.4.204.111
+	stub-addr: 192.99.85.244
+stub-zone:
+	name: "gopher"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "indy"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "ing"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "micro"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "null"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "neo"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "oss"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "parody"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "pirate"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+stub-zone:
+	name: "oz"
+	stub-host: ns2.opennic.glue.
+	stub-host: ns3.opennic.glue.
+	stub-host: ns4.opennic.glue.
+	stub-host: ns5.opennic.glue.
+	stub-host: ns6.opennic.glue.
+	stub-host: ns7.opennic.glue.
+	stub-host: ns8.opennic.glue.
+	stub-host: ns21.opennic.glue.
+# end of OpenNIC
+
+stub-zone:
+	name: "lib"
+	stub-host: seed1.emercoin.com
+	stub-host: seed2.emercoin.com
+stub-zone:
+	name: "coin"
+	stub-host: seed1.emercoin.com.
+	stub-host: seed2.emercoin.com.
+stub-zone:
+	name: "emc"
+	stub-host: seed1.emercoin.com.
+	stub-host: seed2.emercoin.com.
+
+remote-control:
+	control-enable: yes
+	control-interface: /var/run/local_unbound.ctl
+	control-use-cert: no
+
+

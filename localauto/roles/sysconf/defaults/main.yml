@@ -1,0 +1,42 @@
+%YAML 1.2
+---
+
+dnscrypt_port: 10053
+
+# DNS configuration switches
+unbound_logfile: True
+unbound_verbosity: 3
+
+# IPFW switches
+fw: 'ipfw'
+fw_type: 'open'
+
+# Groups for a user running playbook
+user_groups:
+  - '{{ ansible_env.USER }}'
+  - wheel
+  - operator
+  - mpd
+  - webcamd
+
+
+userspace_packages:
+  - { pkg: 'mdp', state: 'present', comment: 'Terminal Presentational Tool' }
+  - { pkg: 'gmake', state: 'present', comment: 'GNU make' }
+  - { pkg: 'higan', state: 'absent', comment: 'Nintendo Emulator' }
+  - { pkg: 'pcsxr', state: 'present', comment: 'PlayStation Emulator' }
+  - { pkg: 'snes9x-gtk', state: 'present', comment: 'Nintendo Emulator' }
+  - { pkg: 'tcpdump', state: 'present', comment: 'Classic network analyser' }
+  - { pkg: 'tshark', state: 'present', comment: 'CLI traffic analyser' }
+  - { pkg: 'wireshark-qt', state: 'present', comment: 'GUI traffic analyser' }
+  - { pkg: 'sc-im', state: 'present', comment: 'SC-IM spreadsheet' }
+  - { pkg: 'webcamd', state: 'present', comment: 'Webcam daemon' }
+  - { pkg: 'cuse4bsd-kmod', state: 'present', comment: 'Webcam drivers' }
+
+# If Android (Termux)
+# pkg install unstable-repo
+# pkg install sc-im
+
+package_groups:
+  - 'webcamd'
+
